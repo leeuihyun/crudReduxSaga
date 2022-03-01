@@ -15,7 +15,7 @@ function Profile({ match }) {
     const { nickname } = match.params;
     const profile = array[nickname];
     if (!profile) {
-        return <h1>존재하지 않는 사용자입니다 !</h1>;
+        return <h1>존재하지 않는 사용자입니다 ! gg</h1>;
     }
     return (
         <div>
