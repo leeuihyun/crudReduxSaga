@@ -1,6 +1,6 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import Profile from "./components/Profile";
+import Profiles from "./components/Profiles";
 import Home from "./components/Home";
 import About from "./components/About";
 import { Link } from "react-router-dom";
@@ -9,25 +9,22 @@ function App() {
         <div>
             <ul>
                 <li>
-                    <Link to="/">Home</Link>
+                    <Link to="/">홈페이지</Link>
                 </li>
                 <li>
-                    <Link to="/about">about</Link>
+                    <Link to="/about">소개</Link>
                 </li>
                 <li>
                     <Link to="/about?detail=true">이건되나?</Link>
                 </li>
                 <li>
-                    <Link to="/profile/vanc">vanc profile</Link>
-                </li>
-                <li>
-                    <Link to="/profile/lee">lee's profile</Link>
+                    <Link to="/profiles">프로필</Link>
                 </li>
             </ul>
             <hr />
             <Route path="/" component={Home} exact />
             <Route path={["/about", "/info"]} component={About}></Route>
-            <Route path="/profile/:nickname" component={Profile} />
+            <Route path="/profiles" component={Profiles} />
         </div>
     );
 }

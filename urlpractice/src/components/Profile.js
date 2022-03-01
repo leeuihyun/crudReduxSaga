@@ -1,6 +1,6 @@
 import React from "react";
 
-const array = {
+export const array = {
     vanc: {
         name: "반씨",
         description: "프론트엔드 리액트 개발자가 될 거야",
