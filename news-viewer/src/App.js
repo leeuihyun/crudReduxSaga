@@ -4,8 +4,9 @@ import { useState } from 'react';
 
 function App() {
   const [data, setData] = useState(null);
-
-  const api = 'https://jsonplaceholder.typicode.com/todos/1';
+  //🌟 React news-api, axios
+  const api =
+    'https://newsapi.org/v2/top-headlines?country=kr&apiKey=d5acc892bd7744ffbc8d2bcb88f9be49';
   const onClick = async () => {
     try {
       const res = await axios.get(api);
