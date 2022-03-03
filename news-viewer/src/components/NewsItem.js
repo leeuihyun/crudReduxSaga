@@ -1,12 +1,11 @@
 import React from 'react';
-import styled from 'styled-component';
+import styled from 'styled-components';
 
 const NewsItemBox = styled.div`
   display: flex;
   .thumbnail {
     margin-right: 1rem;
-    margin-left: 1rem;
-    .img {
+    img {
       display: block;
       width: 160px;
       height: 160px;
@@ -42,14 +41,14 @@ function NewsItem({ article }) {
             <img src={urlToImage} alt="thumbnail"></img>
           </a>
         )}
-        <div className="contents">
-          <h2>
-            <a href={url} target="_blank" rel="noopener noreferrer">
-              {title}
-            </a>
-          </h2>
-          <p>{description}</p>
-        </div>
+      </div>
+      <div className="contents">
+        <h2>
+          <a href={url} target="_blank" rel="noopener noreferrer">
+            {title}
+          </a>
+        </h2>
+        <p>{description}</p>
       </div>
     </NewsItemBox>
   );
