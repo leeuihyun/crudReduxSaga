@@ -11,8 +11,8 @@ function App() {
 
   return (
     <>
-      <Categories />
-      <NewsList />
+      <Categories onSelect={onSelect} category={category} />
+      <NewsList category={category} />
     </>
   );
 }
