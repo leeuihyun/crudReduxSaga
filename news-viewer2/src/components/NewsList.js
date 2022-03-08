@@ -17,10 +17,11 @@ const NewsListBox = styled.div`
     }
 `;
 
-function NewsList({ articles, setArticle }) {
+function NewsList({ articles, setArticle, loading, setLoading }) {
     useEffect(() => {
         const fetchData = async () => {
             try {
+                setLoading(true);
                 const res = await axios.get(
                     "https://newsapi.org/v2/top-headlines?country=kr&apiKey=d5acc892bd7744ffbc8d2bcb88f9be49"
                 );
@@ -28,9 +29,11 @@ function NewsList({ articles, setArticle }) {
             } catch (e) {
                 console.log(e);
             }
+            setLoading(false);
         };
         fetchData();
     }, []);
+    if (loading) return <NewsListBox>로딩중 . . . </NewsListBox>;
     if (!articles) {
         return null;
     }
