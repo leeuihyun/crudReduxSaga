@@ -43,26 +43,46 @@ const Footer = styled.div`
   }
 `;
 
-const AuthForm = () => {
+const typeMap = {
+  login: '로그인',
+  register: '회원가입',
+};
+const AuthForm = ({ type }) => {
+  const formType = typeMap[type];
   return (
     <AuthFormBlock>
-      <h3>로그인</h3>
-      <StyledInput
-        placeholder="아이디"
-        name="username"
-        autoComplete="username"
-      />
-      <StyledInput
-        placeholder="비밀번호"
-        name="password"
-        autoComplete="new-password"
-        type="text"
-      />
-      <Button fullWidth cyan style={{ marginTop: '1rem' }}>
-        로그인
-      </Button>
+      <h3>{formType}</h3>
+      <form>
+        <StyledInput
+          placeholder="아이디"
+          name="username"
+          autoComplete="username"
+        />
+        <StyledInput
+          placeholder="비밀번호"
+          name="password"
+          autoComplete="new-password"
+          type="password"
+        />
+        {type === 'register' && (
+          <StyledInput
+            placeholder="비밀번호 확인"
+            name="passwordConfirm"
+            autoComplete="new-password"
+            type="password"
+          />
+        )}
+        <Button fullWidth cyan style={{ marginTop: '1rem' }}>
+          {formType}
+        </Button>
+      </form>
+
       <Footer>
-        <Link to="/register">회원가입</Link>
+        {type === 'login' ? (
+          <Link to="register">회원가입</Link>
+        ) : (
+          <Link to="login">로그인</Link>
+        )}
       </Footer>
     </AuthFormBlock>
   );
