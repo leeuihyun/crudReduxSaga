@@ -47,22 +47,26 @@ const typeMap = {
   login: '로그인',
   register: '회원가입',
 };
-const AuthForm = ({ type }) => {
+const AuthForm = ({ type, form, onChange, onSubmit }) => {
   const formType = typeMap[type];
   return (
     <AuthFormBlock>
       <h3>{formType}</h3>
-      <form>
+      <form onSubmit={onSubmit}>
         <StyledInput
           placeholder="아이디"
           name="username"
           autoComplete="username"
+          onChange={onChange}
+          value={form.username}
         />
         <StyledInput
           placeholder="비밀번호"
           name="password"
           autoComplete="new-password"
           type="password"
+          onChange={onChange}
+          value={form.password}
         />
         {type === 'register' && (
           <StyledInput
@@ -70,6 +74,8 @@ const AuthForm = ({ type }) => {
             name="passwordConfirm"
             autoComplete="new-password"
             type="password"
+            onChange={onChange}
+            value={form.passwordConfirm}
           />
         )}
         <Button fullWidth cyan style={{ marginTop: '1rem' }}>
