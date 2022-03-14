@@ -53,7 +53,7 @@ const typeMap = {
   login: '로그인',
   register: '회원가입',
 };
-const AuthForm = ({ type, form, onChange, onSubmit }) => {
+const AuthForm = ({ type, form, onChange, onSubmit, error }) => {
   const formType = typeMap[type];
   return (
     <AuthFormBlock>
@@ -84,7 +84,7 @@ const AuthForm = ({ type, form, onChange, onSubmit }) => {
             value={form.passwordConfirm}
           />
         )}
-        <ErrorMessage>에러 발생!</ErrorMessage>
+        {error && <ErrorMessage>{error}</ErrorMessage>}
         <Button fullWidth cyan style={{ marginTop: '1rem' }}>
           {formType}
         </Button>
