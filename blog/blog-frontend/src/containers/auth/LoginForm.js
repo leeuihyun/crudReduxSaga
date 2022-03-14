@@ -1,12 +1,17 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeField, initializeForm } from '../../modules/auth';
+import { changeField, initializeForm, login } from '../../modules/auth';
 import AuthForm from '../../components/auth/AuthForm';
+import { withRouter } from 'react-router-dom';
+import { check } from '../../modules/user';
 
-function LoginForm() {
+function LoginForm({ history }) {
   const dispatch = useDispatch();
-  const form = useSelector(({ auth }) => ({
+  const { form, auth, authError, user } = useSelector(({ auth, user }) => ({
     form: auth.login,
+    auth: auth.auth,
+    authError: auth.authError,
+    user: user.user,
   }));
   const onChangeField = (e) => {
     const { name, value } = e.target;
@@ -20,12 +25,30 @@ function LoginForm() {
   };
   const onSubmit = (e) => {
     e.preventDefault();
+    const { username, password } = form;
+    dispatch(login({ username, password }));
   };
   //component가 처음 렌더링될 때 form을 초기화함.
   useEffect(() => {
     dispatch(initializeForm('login'));
   }, [dispatch]);
 
+  useEffect(() => {
+    if (authError) {
+      console.log('오류 발생');
+      console.log(authError);
+      return;
+    }
+    if (auth) {
+      console.log('로그인 성공');
+      dispatch(check());
+    }
+  }, [auth, authError, dispatch]);
+  useEffect(() => {
+    if (user) {
+      history.push('/');
+    }
+  }, [history, user]);
   return (
     <AuthForm
       type="login"
@@ -36,4 +59,4 @@ function LoginForm() {
   );
 }
 
-export default LoginForm;
+export default withRouter(LoginForm);
