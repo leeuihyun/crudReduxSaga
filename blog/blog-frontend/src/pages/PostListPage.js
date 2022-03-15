@@ -1,10 +1,11 @@
 import React from 'react';
-import Button from '../components/common/Button';
+import Header from '../components/common/Header';
 
 function PostListPage() {
   return (
     <div>
-      <Button>버튼</Button>
+      <Header />
+      <div>hi ? </div>
     </div>
   );
 }
