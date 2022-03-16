@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
 import React from 'react';
+import { useState, useCallback } from 'react';
 
 const TagBoxBlock = styled.div`
   width: 100%;
@@ -59,26 +60,60 @@ const TagListBlock = styled.div`
 `;
 
 //React.memo 를 써서 tag값이 바뀔 때만 리렌더링되도록 처리한다.
-const TagItem = React.memo(({ tag }) => <Tag>#{tag}</Tag>);
+const TagItem = React.memo(({ tag, onRemove }) => (
+  <Tag onClick={() => onRemove(tag)}>#{tag}</Tag>
+));
 
 //React.memo 를 써서 tags값이 바뀔 때만 리렌더링되도록 처리한다.
-const TagList = React.memo(({ tags }) => (
+const TagList = React.memo(({ tags, onRemove }) => (
   <TagListBlock>
     {tags.map((tag) => (
-      <TagItem tag={tag} key={tag} />
+      <TagItem tag={tag} key={tag} onRemove={onRemove} />
     ))}
   </TagListBlock>
 ));
 
 const TagBox = () => {
+  const [input, setInput] = useState('');
+  const [localTags, setLocalTags] = useState([]);
+
+  const onRemove = useCallback(
+    (tag) => {
+      setLocalTags(localTags.filter((t) => t !== tag));
+    },
+    [localTags],
+  );
+  const onChange = useCallback((e) => {
+    setInput(e.target.value);
+  }, []);
+  const insertTag = useCallback(
+    (tag) => {
+      if (!tag) return; //공백이라면 추가하지 않음
+      if (localTags.includes(tag)) return;
+      setLocalTags(localTags.concat(tag));
+    },
+    [localTags],
+  );
+  const onSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+      insertTag(input.trim()); // 앞뒤 공백을 없앤 후 등록
+      setInput(''); //input을 다시 초기화.
+    },
+    [input, insertTag],
+  );
   return (
     <TagBoxBlock>
       <h4>태그</h4>
-      <TagForm>
-        <input placeholder="태그를 입력하세요" />
-        <button type="submit"></button>
-        <TagList tags={['태그1', '태그2', '태그3']} />
+      <TagForm onSubmit={onSubmit}>
+        <input
+          onChange={onChange}
+          placeholder="태그를 입력하세요"
+          value={input}
+        />
+        <button type="submit">추가</button>
       </TagForm>
+      <TagList onRemove={onRemove} tags={localTags} />
     </TagBoxBlock>
   );
 };
