@@ -1,9 +1,10 @@
 import React from 'react';
 import Responsive from '../components/common/Responsive';
 import HeaderContainer from '../containers/common/HeaderContainer';
-import TagBox from '../components/write/TagBox';
+
 import WriteActionButton from '../components/write/WriteActionButton';
 import EditorContainer from '../containers/write/EditorContainer';
+import TagBoxContainer from '../containers/write/TagBoxContainer';
 
 function WritePage() {
   return (
@@ -11,7 +12,7 @@ function WritePage() {
       <HeaderContainer />
       <Responsive>
         <EditorContainer />
-        <TagBox />
+        <TagBoxContainer />
         <WriteActionButton />
       </Responsive>
     </>
