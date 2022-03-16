@@ -91,6 +91,7 @@ const TagBox = () => {
       if (!tag) return; //공백이라면 추가하지 않음
       if (localTags.includes(tag)) return;
       setLocalTags(localTags.concat(tag));
+      console.log(localTags);
     },
     [localTags],
   );
