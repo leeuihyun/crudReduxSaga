@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import PostViewer from '../../components/post/PostViewer';
 import { useEffect } from 'react';
 import { readPost, unloadPost } from '../../modules/post';
+import { withRouter } from 'react-router-dom';
 
 const PostViewerContainer = ({ match }) => {
   const { post, error, loading } = useSelector(({ post, loading }) => ({
@@ -21,4 +22,4 @@ const PostViewerContainer = ({ match }) => {
   return <PostViewer post={post} error={error} loading={loading}></PostViewer>;
 };
 
-export default PostViewerContainer;
+export default withRouter(PostViewerContainer);
