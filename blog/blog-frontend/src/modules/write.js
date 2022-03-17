@@ -3,7 +3,7 @@ import createRequestSaga, {
   createRequestActionTypes,
 } from '../lib/createRequestSaga';
 import * as postAPI from '../lib/api/write';
-import { takeLatest } from '';
+import { takeLatest } from 'redux-saga/effects';
 
 const INITIALIZE = 'write/INITIALIZE';
 const CHANGE_FIELD = 'write/CHANGE_FIELD';
@@ -49,9 +49,9 @@ const write = handleActions(
       ...state,
       post,
     }),
-    [WRITE_POST_FAILURE]: (state, { payload: error }) => ({
+    [WRITE_POST_FAILURE]: (state, { payload: postError }) => ({
       ...state,
-      postError: error,
+      postError,
     }),
   },
   initialState,
