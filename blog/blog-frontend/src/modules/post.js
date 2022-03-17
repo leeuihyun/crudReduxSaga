@@ -24,7 +24,7 @@ const initialState = {
   error: null,
 };
 
-const Post = handleActions(
+const post = handleActions(
   {
     [READ_POST_SUCCESS]: (state, action) => ({
       ...state,
@@ -39,4 +39,4 @@ const Post = handleActions(
   initialState,
 );
 
-export default Post;
+export default post;
