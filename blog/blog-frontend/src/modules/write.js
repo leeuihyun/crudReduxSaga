@@ -2,7 +2,7 @@ import { createAction, handleActions } from 'redux-actions';
 import createRequestSaga, {
   createRequestActionTypes,
 } from '../lib/createRequestSaga';
-import * as postAPI from '../lib/api/write';
+import * as postAPI from '../lib/api/posts';
 import { takeLatest } from 'redux-saga/effects';
 
 const INITIALIZE = 'write/INITIALIZE';
